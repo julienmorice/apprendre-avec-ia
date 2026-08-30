@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Apprendre avec l'IA — Atelier de rentrée PracTice</title>
 <meta name="description" content="Faire avec, pas faire par. Bloc IA de l'atelier de rentree PracTice, nouveaux entrants IMT Business School, 31 aout 2026. Julien Morice.">
 <meta name="author" content="Julien Morice — Service PracTice, IMT Business School">
@@ -184,6 +184,34 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
   display:grid;place-items:center;opacity:0;transition:opacity .25s,background .2s}
 #tocbtn:hover{opacity:1;background:rgba(255,255,255,.34)}
 #tocbtn svg{width:18px;height:18px;fill:currentColor}
+
+/* ---------- tactile : les commandes doivent se voir ---------- */
+/* Sans souris, il n'y a pas de survol : les flèches resteraient invisibles,
+   et il n'y a pas de clavier pour les remplacer. */
+@media (hover:none),(pointer:coarse){
+  .nav{opacity:.92;width:58px;height:58px;font-size:28px;background:rgba(18,18,18,.62);
+    box-shadow:0 2px 14px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .nav:active{background:var(--violet)}
+  #prev{left:calc(10px + env(safe-area-inset-left))}
+  #next{right:calc(10px + env(safe-area-inset-right))}
+  #tocbtn{opacity:.92;width:52px;height:52px;background:rgba(18,18,18,.62);
+    left:calc(12px + env(safe-area-inset-left));bottom:calc(12px + env(safe-area-inset-bottom));
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  #tocbtn svg{width:22px;height:22px}
+  #num{right:calc(20px + env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));font-size:15px}
+  .tocitem{padding:15px 16px;font-size:16px}
+}
+
+/* ---------- téléphone en portrait : la scène 16:9 devient minuscule ---------- */
+#rotate{display:none}
+@media (hover:none) and (orientation:portrait){
+  #rotate{position:fixed;left:0;right:0;bottom:calc(84px + env(safe-area-inset-bottom));z-index:60;
+    display:flex;align-items:center;justify-content:center;gap:10px;pointer-events:none;
+    color:rgba(255,255,255,.82);font-size:15px;font-family:var(--sans);text-align:center;padding:0 24px}
+  #rotate .ph{display:inline-block;width:15px;height:24px;border:2px solid currentColor;border-radius:4px;flex:none;
+    animation:tilt 2.4s ease-in-out infinite}
+}
+@keyframes tilt{0%,55%{transform:rotate(0)}75%,100%{transform:rotate(-90deg)}}
 
 /* ---------- sommaire ---------- */
 #toc{position:fixed;inset:0;background:rgba(18,18,18,.95);z-index:100;display:none;padding:44px 52px;overflow:auto}
@@ -522,6 +550,7 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
   <div class="tt">Sommaire — cliquer pour aller à la slide · Échap pour fermer</div>
   <div id="tocgrid"></div>
 </div>
+<div id="rotate"><span class="ph"></span><span>Tourne ton téléphone pour lire confortablement</span></div>
 <button id="tocbtn" title="Sommaire (S)" aria-label="Ouvrir le sommaire"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="8" height="8" rx="1.5"/><rect x="11" y="1" width="8" height="8" rx="1.5"/><rect x="1" y="11" width="8" height="8" rx="1.5"/><rect x="11" y="11" width="8" height="8" rx="1.5"/></svg></button>
 <button class="nav" id="prev" aria-label="Slide précédente">‹</button>
 <button class="nav" id="next" aria-label="Slide suivante">›</button>
@@ -592,6 +621,25 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
   });
   document.getElementById('tocbtn').addEventListener('click',toggleToc);
   document.getElementById('next').addEventListener('click',function(){show(i+1);});
+
+  // balayage tactile. Au-dessus d'un lecteur vidéo le geste appartient à l'iframe,
+  // d'où l'importance des flèches, visibles sur tactile.
+  (function(){
+    var x0=null,y0=null,t0=0;
+    var vp=document.getElementById('viewport');
+    vp.addEventListener('touchstart',function(e){
+      if(e.touches.length!==1){x0=null;return;}
+      x0=e.touches[0].clientX; y0=e.touches[0].clientY; t0=Date.now();
+    },{passive:true});
+    vp.addEventListener('touchend',function(e){
+      if(x0===null) return;
+      var t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+      x0=null;
+      if(Date.now()-t0>700) return;                 // geste trop lent, sans doute autre chose
+      if(Math.abs(dx)<45||Math.abs(dx)<Math.abs(dy)*1.6) return;  // pas franchement horizontal
+      show(dx<0 ? i+1 : i-1);
+    },{passive:true});
+  })();
   document.getElementById('prev').addEventListener('click',function(){show(i-1);});
 
   // reprise via #n
