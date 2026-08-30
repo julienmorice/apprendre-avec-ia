@@ -203,9 +203,15 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
 }
 
 /* ---------- téléphone en portrait : la scène 16:9 devient minuscule ---------- */
+/* La scène n'occupe qu'une bande centrale : on regroupe les commandes dans le
+   noir du bas plutôt que de les laisser par-dessus la slide. */
 #rotate{display:none}
 @media (hover:none) and (orientation:portrait){
-  #rotate{position:fixed;left:0;right:0;bottom:calc(84px + env(safe-area-inset-bottom));z-index:60;
+  .nav{top:auto;transform:none;bottom:calc(14px + env(safe-area-inset-bottom))}
+  #prev{left:auto;right:calc(84px + env(safe-area-inset-right))}
+  #next{right:calc(16px + env(safe-area-inset-right))}
+  #num{bottom:calc(88px + env(safe-area-inset-bottom))}
+  #rotate{position:fixed;left:0;right:0;bottom:calc(122px + env(safe-area-inset-bottom));z-index:60;
     display:flex;align-items:center;justify-content:center;gap:10px;pointer-events:none;
     color:rgba(255,255,255,.82);font-size:15px;font-family:var(--sans);text-align:center;padding:0 24px}
   #rotate .ph{display:inline-block;width:15px;height:24px;border:2px solid currentColor;border-radius:4px;flex:none;
