@@ -23,6 +23,21 @@ Page HTML autonome, 21 slides, scène 16:9 mise à l'échelle.
 L'adresse retient la position (`#12`), ce qui permet de reprendre où on
 en était après un rechargement.
 
+### Sur téléphone et tablette
+
+Sans souris il n'y a pas de survol, et sans clavier pas de raccourci : les
+commandes sont donc affichées en permanence sur les appareils tactiles.
+
+- **Glisser** vers la gauche ou la droite pour changer de slide.
+- Les **flèches** ‹ › sont visibles en bas (portrait) ou sur les côtés (paysage).
+- Le **bouton grille** en bas à gauche ouvre le sommaire.
+- Au-dessus d'un lecteur vidéo, le glissement appartient au lecteur : utiliser
+  les flèches.
+
+En portrait, la scène 16:9 se réduit à une bande étroite et le texte devient
+petit ; un indice invite à tourner l'appareil. **La présentation se lit en
+paysage.**
+
 ## Vidéos
 
 Les cinq démonstrations sont des lecteurs MediaServer IP Paris (UbiCast)
