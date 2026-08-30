@@ -168,9 +168,10 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
 .t-end p{color:rgba(255,255,255,.85);font-size:30px;margin-top:28px}
 
 /* ---------- chrome ---------- */
-#bar{position:fixed;left:0;bottom:0;height:4px;background:var(--violet);width:0;transition:width .3s ease;z-index:50}
+#bar{position:fixed;left:0;bottom:0;height:4px;background:var(--violet);width:0;transition:width .3s ease;z-index:50;
+  pointer-events:none}
 #num{position:fixed;right:20px;bottom:18px;font-size:14px;color:#8d8d8d;letter-spacing:.1em;z-index:50;
-  font-family:var(--sans);user-select:none}
+  font-family:var(--sans);user-select:none;pointer-events:none}
 #hint{position:fixed;left:20px;bottom:16px;font-size:13px;color:#6d6d6d;z-index:50;opacity:0;transition:opacity .3s}
 #viewport:hover #hint{opacity:1}
 .nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
@@ -178,6 +179,11 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
 #viewport:hover .nav{opacity:.5}
 .nav:hover{opacity:1!important;background:rgba(255,255,255,.3)}
 #prev{left:16px}#next{right:16px}
+#tocbtn{position:fixed;left:16px;bottom:14px;width:40px;height:40px;border-radius:9px;z-index:50;
+  background:rgba(255,255,255,.14);color:#fff;border:0;cursor:pointer;padding:0;
+  display:grid;place-items:center;opacity:0;transition:opacity .25s,background .2s}
+#tocbtn:hover{opacity:1;background:rgba(255,255,255,.34)}
+#tocbtn svg{width:18px;height:18px;fill:currentColor}
 
 /* ---------- sommaire ---------- */
 #toc{position:fixed;inset:0;background:rgba(18,18,18,.95);z-index:100;display:none;padding:44px 52px;overflow:auto}
@@ -516,6 +522,7 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
   <div class="tt">Sommaire — cliquer pour aller à la slide · Échap pour fermer</div>
   <div id="tocgrid"></div>
 </div>
+<button id="tocbtn" title="Sommaire (S)" aria-label="Ouvrir le sommaire"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="8" height="8" rx="1.5"/><rect x="11" y="1" width="8" height="8" rx="1.5"/><rect x="1" y="11" width="8" height="8" rx="1.5"/><rect x="11" y="11" width="8" height="8" rx="1.5"/></svg></button>
 <button class="nav" id="prev" aria-label="Slide précédente">‹</button>
 <button class="nav" id="next" aria-label="Slide suivante">›</button>
 
@@ -583,8 +590,7 @@ p.small{font-size:22px;line-height:1.5;color:#5a5a5a}
       else { document.exitFullscreen(); }
     }
   });
-  num.addEventListener('click',toggleToc);
-  num.style.cursor='pointer';
+  document.getElementById('tocbtn').addEventListener('click',toggleToc);
   document.getElementById('next').addEventListener('click',function(){show(i+1);});
   document.getElementById('prev').addEventListener('click',function(){show(i-1);});
 
