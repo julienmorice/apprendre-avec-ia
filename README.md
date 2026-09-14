@@ -9,9 +9,10 @@ Julien Morice — Service PracTice, IMT Business School.
 
 ## Déroulé
 
-1. **`gen-z.html`** — page d'ouverture « La Gen Z à l'ère de l'IA », avec la
-   vidéo de mise en contexte et un bouton pour enchaîner vers la présentation.
-2. **`index.html`** — la présentation, 21 slides.
+1. **`index.html`** (racine du site) — page d'ouverture « La Gen Z à l'ère
+   de l'IA », avec la vidéo de mise en contexte et un bouton pour enchaîner
+   vers la présentation.
+2. **`presentation.html`** — la présentation elle-même, 21 slides.
 
 ## Utilisation
 
@@ -53,7 +54,11 @@ vidéo dans un onglet », utile si le lecteur ne se charge pas.
 ## Structure
 
 ```
-gen-z.html      page d'ouverture « La Gen Z à l'ère de l'IA » (vidéo)
-index.html      toute la présentation, styles et scripts compris
-images/         visuels des slides et QR codes
+index.html         page d'ouverture « La Gen Z à l'ère de l'IA » (vidéo) — racine du site
+presentation.html   toute la présentation, styles et scripts compris
+images/             visuels des slides et QR codes
 ```
+
+Le QR code « toute la présentation en ligne » de la dernière slide pointe
+directement vers `presentation.html`, sans repasser par la vidéo
+d'ouverture pour qui le scanne après coup.
