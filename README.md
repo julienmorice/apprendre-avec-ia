@@ -7,16 +7,11 @@ d'IMT Business School, le 31 août 2026.
 
 Julien Morice — Service PracTice, IMT Business School.
 
-## Déroulé
-
-1. **`index.html`** (racine du site) — page d'ouverture « La Gen Z à l'ère
-   de l'IA », avec la vidéo de mise en contexte et un bouton pour enchaîner
-   vers la présentation.
-2. **`presentation.html`** — la présentation elle-même, 21 slides.
-
 ## Utilisation
 
-Page HTML autonome, 21 slides, scène 16:9 mise à l'échelle.
+Page HTML autonome, 23 slides, scène 16:9 mise à l'échelle. La slide 1 est
+la vidéo « La Gen Z à l'ère de l'IA », qui ouvre le diaporama avant la
+slide 2, « Apprendre avec l'IA ».
 
 | Touche | Action |
 |---|---|
@@ -47,18 +42,14 @@ paysage.**
 
 ## Vidéos
 
-Les cinq démonstrations sont des lecteurs MediaServer IP Paris (UbiCast)
-intégrés en `iframe`. Chaque slide vidéo porte aussi un lien « Ouvrir la
-vidéo dans un onglet », utile si le lecteur ne se charge pas.
+Six slides intègrent des lecteurs MediaServer IP Paris (UbiCast) en
+`iframe` : la vidéo d'ouverture « La Gen Z à l'ère de l'IA » et les cinq
+démonstrations de l'atelier. Chaque slide vidéo porte aussi un lien
+« Ouvrir la vidéo dans un onglet », utile si le lecteur ne se charge pas.
 
 ## Structure
 
 ```
-index.html         page d'ouverture « La Gen Z à l'ère de l'IA » (vidéo) — racine du site
-presentation.html   toute la présentation, styles et scripts compris
-images/             visuels des slides et QR codes
+index.html      toute la présentation, styles et scripts compris
+images/         visuels des slides et QR codes
 ```
-
-Le QR code « toute la présentation en ligne » de la dernière slide pointe
-directement vers `presentation.html`, sans repasser par la vidéo
-d'ouverture pour qui le scanne après coup.
